@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>No JS Game — Demo — Advanced</title>
+
+<link rel="stylesheet" href="advanced.css">
+
+<main>
+  <svg viewBox="0 0 160 100">
+    <!-- THIS IS THE GAME STATE -->
+    <g id="gameState" class="idle"> <!-- define the game state -->
+      <set attributeName="class" begin="start.click" to="run" /><!-- Pikachu start running -->
+      <set attributeName="class" begin="start.click+43.2s" to="end" /><!-- No matter what, after 60s, pikachu stop running -->
+    </g>
+
+    <g id="activeLine"> <!-- define the active line where Pikachu is currently position -->
+      <set attributeName="class" begin="start.click"  to="upper" />
+      <set attributeName="class" begin="upper.click"  to="upper" />
+      <set attributeName="class" begin="top.click"    to="top" />
+      <set attributeName="class" begin="middle.click" to="middle" />
+    </g>
+
+    <g id="upperState"> <!-- upper line state -->
+      <set attributeName="class" begin="upper.click" to="clean" /><!-- when pikachu jump on the line we reset its state -->
+      <set attributeName="class" begin="start.click+2.55s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (21  - 4) 17 * 150ms -->
+      <set attributeName="class" begin="start.click+3.9s"   to="crash" /><!-- if the line is active, pikasu crash on a rock after (30  - 4) 26 * 150ms -->
+      <set attributeName="class" begin="start.click+5.85s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (43  - 4) 39 * 150ms -->
+      <set attributeName="class" begin="start.click+7.65s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (55  - 4) 51 * 150ms -->
+      <set attributeName="class" begin="start.click+8.1s"   to="crash" /><!-- if the line is active, pikasu crash on a rock after (58  - 4) 54 * 150ms -->
+      <set attributeName="class" begin="start.click+13.5s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (94  - 4) 90 * 150ms -->
+      <set attributeName="class" begin="start.click+14.85s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (103 - 4) 99 * 150ms -->
+      <set attributeName="class" begin="start.click+16.95s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (117 - 4) 113 * 150ms -->
+      <set attributeName="class" begin="start.click+18s"    to="crash" /><!-- if the line is active, pikasu crash on a rock after (124 - 4) 120 * 150ms -->
+      <set attributeName="class" begin="start.click+25.2s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (172 - 4) 168 * 150ms -->
+      <set attributeName="class" begin="start.click+28.5s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (194 - 4) 190 * 150ms -->
+      <set attributeName="class" begin="start.click+28.65s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (195 - 4) 191 * 150ms -->
+      <set attributeName="class" begin="start.click+28.8s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (196 - 4) 192 * 150ms -->
+      <set attributeName="class" begin="start.click+28.95s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (197 - 4) 193 * 150ms -->
+      <set attributeName="class" begin="start.click+29.55s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (201 - 4) 197 * 150ms -->
+      <set attributeName="class" begin="start.click+29.7s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (202 - 4) 198 * 150ms -->
+      <set attributeName="class" begin="start.click+29.85s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (203 - 4) 199 * 150ms -->
+      <set attributeName="class" begin="start.click+30s"    to="crash" /><!-- if the line is active, pikasu crash on a rock after (204 - 4) 200 * 150ms -->
+      <set attributeName="class" begin="start.click+30.15s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (205 - 4) 201 * 150ms -->
+      <set attributeName="class" begin="start.click+30.3s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (206 - 4) 202 * 150ms -->
+      <set attributeName="class" begin="start.click+30.45s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (207 - 4) 203 * 150ms -->
+      <set attributeName="class" begin="start.click+32.4s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (220 - 4) 216 * 150ms -->
+      <set attributeName="class" begin="start.click+33.75s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (229 - 4) 225 * 150ms -->
+      <set attributeName="class" begin="start.click+34.05s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (231 - 4) 227 * 150ms -->
+      <set attributeName="class" begin="start.click+34.65s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (235 - 4) 231 * 150ms -->
+      <set attributeName="class" begin="start.click+36.9s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (250 - 4) 246 * 150ms -->
+      <set attributeName="class" begin="start.click+38.7s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (262 - 4) 258 * 150ms -->
+      <set attributeName="class" begin="start.click+39.15s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (265 - 4) 261 * 150ms -->
+      <set attributeName="class" begin="start.click+40.05s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (271 - 4) 267 * 150ms -->
+      <set attributeName="class" begin="start.click+41.85s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (283 - 4) 279 * 150ms -->
+    </g>
+
+    <g id="topState"> <!-- upper line state -->
+      <set attributeName="class" begin="top.click" to="clean" /><!-- when pikachu jump on the line we reset its state -->
+      <set attributeName="class" begin="start.click+2.7s"   to="crash" /><!-- if the line is active, pikasu crash on a rock after (22  - 4) 18 * 150ms -->
+      <set attributeName="class" begin="start.click+3.3s"   to="crash" /><!-- if the line is active, pikasu crash on a rock after (26  - 4) 22 * 150ms -->
+      <set attributeName="class" begin="start.click+6.3s"   to="crash" /><!-- if the line is active, pikasu crash on a rock after (46  - 4) 42 * 150ms -->
+      <set attributeName="class" begin="start.click+8.7s"   to="crash" /><!-- if the line is active, pikasu crash on a rock after (62  - 4) 58 * 150ms -->
+      <set attributeName="class" begin="start.click+11.55s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (81  - 4) 77 * 150ms -->
+      <set attributeName="class" begin="start.click+12.15s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (85  - 4) 81 * 150ms -->
+      <set attributeName="class" begin="start.click+13.05s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (91  - 4) 87 * 150ms -->
+      <set attributeName="class" begin="start.click+16.35s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (113 - 4) 109 * 150ms -->
+      <set attributeName="class" begin="start.click+19.95s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (137 - 4) 133 * 150ms -->
+      <set attributeName="class" begin="start.click+21.6s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (148 - 4) 144 * 150ms -->
+      <set attributeName="class" begin="start.click+21.75s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (149 - 4) 145 * 150ms -->
+      <set attributeName="class" begin="start.click+22.05s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (151 - 4) 147 * 150ms -->
+      <set attributeName="class" begin="start.click+22.2s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (152 - 4) 148 * 150ms -->
+      <set attributeName="class" begin="start.click+22.35s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (153 - 4) 149 * 150ms -->
+      <set attributeName="class" begin="start.click+22.5s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (154 - 4) 150 * 150ms -->
+      <set attributeName="class" begin="start.click+22.65s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (155 - 4) 151 * 150ms -->
+      <set attributeName="class" begin="start.click+23.1s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (159 - 4) 154 * 150ms -->
+      <set attributeName="class" begin="start.click+25.2s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (172 - 4) 168 * 150ms -->
+      <set attributeName="class" begin="start.click+25.65s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (175 - 4) 171 * 150ms -->
+      <set attributeName="class" begin="start.click+27.6s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (188 - 4) 184 * 150ms -->
+      <set attributeName="class" begin="start.click+28.95s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (197 - 4) 193 * 150ms -->
+      <set attributeName="class" begin="start.click+30.75s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (209 - 4) 205 * 150ms -->
+      <set attributeName="class" begin="start.click+31.8s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (216 - 4) 212 * 150ms -->
+      <set attributeName="class" begin="start.click+34.8s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (236 - 4) 232 * 150ms -->
+      <set attributeName="class" begin="start.click+35.55s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (241 - 4) 237 * 150ms -->
+      <set attributeName="class" begin="start.click+38.4s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (260 - 4) 256 * 150ms -->
+      <set attributeName="class" begin="start.click+39.75s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (269 - 4) 265 * 150ms -->
+      <set attributeName="class" begin="start.click+40.35s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (273 - 4) 269 * 150ms -->
+      <set attributeName="class" begin="start.click+40.5s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (274 - 4) 270 * 150ms -->
+      <set attributeName="class" begin="start.click+40.65s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (275 - 4) 271 * 150ms -->
+    </g>
+
+    <g id="middleState"> <!-- upper line state -->
+      <set attributeName="class" begin="middle.click" to="clean" /><!-- when pikachu jump on the line we reset its state -->
+      <set attributeName="class" begin="start.click+4.65s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (35  - 4) 31 * 150ms -->
+      <set attributeName="class" begin="start.click+5.85s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (43  - 4) 39 * 150ms -->
+      <set attributeName="class" begin="start.click+6.85s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (50  - 4) 46 * 150ms -->
+      <set attributeName="class" begin="start.click+7.05s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (51  - 4) 47 * 150ms -->
+      <set attributeName="class" begin="start.click+9.45s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (67  - 4) 63 * 150ms -->
+      <set attributeName="class" begin="start.click+11.1s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (78  - 4) 74 * 150ms -->
+      <set attributeName="class" begin="start.click+15s"    to="crash" /><!-- if the line is active, pikasu crash on a rock after (104 - 4) 100 * 150ms -->
+      <set attributeName="class" begin="start.click+16.95s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (117 - 4) 113 * 150ms -->
+      <set attributeName="class" begin="start.click+18.6s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (128 - 4) 124 * 150ms -->
+      <set attributeName="class" begin="start.click+18.75s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (129 - 4) 125 * 150ms -->
+      <set attributeName="class" begin="start.click+18.9s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (130 - 4) 126 * 150ms -->
+      <set attributeName="class" begin="start.click+19.2s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (132 - 4) 128 * 150ms -->
+      <set attributeName="class" begin="start.click+19.5s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (134 - 4) 130 * 150ms -->
+      <set attributeName="class" begin="start.click+23.7s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (162 - 4) 158 * 150ms -->
+      <set attributeName="class" begin="start.click+26.25s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (179 - 4) 175 * 150ms -->
+      <set attributeName="class" begin="start.click+30s"    to="crash" /><!-- if the line is active, pikasu crash on a rock after (204 - 4) 200 * 150ms -->
+      <set attributeName="class" begin="start.click+30.3s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (206 - 4) 202 * 150ms -->
+      <set attributeName="class" begin="start.click+31.2s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (212 - 4) 208 * 150ms -->
+      <set attributeName="class" begin="start.click+33s"    to="crash" /><!-- if the line is active, pikasu crash on a rock after (224 - 4) 220 * 150ms -->
+      <set attributeName="class" begin="start.click+33.3s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (226 - 4) 222 * 150ms -->
+      <set attributeName="class" begin="start.click+35.85s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (243 - 4) 239 * 150ms -->
+      <set attributeName="class" begin="start.click+37.35s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (253 - 4) 249 * 150ms -->
+      <set attributeName="class" begin="start.click+37.5s"  to="crash" /><!-- if the line is active, pikasu crash on a rock after (254 - 4) 250 * 150ms -->
+      <set attributeName="class" begin="start.click+39s"    to="crash" /><!-- if the line is active, pikasu crash on a rock after (264 - 4) 260 * 150ms -->
+      <set attributeName="class" begin="start.click+42.15s" to="crash" /><!-- if the line is active, pikasu crash on a rock after (285 - 4) 281 * 150ms -->
+    </g>
+
+    <!-- THIS IS THE GAME BOARD -->
+    <foreignObject id="gameboard" width="100%" height="100%">
+      <div class="scene">
+        <img class="bg" src="img/environment/layers/back.png" alt="" />
+
+        <div class="props">
+          <div class="tile bush">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile "></div>
+          <div class="tile "></div>
+          <div class="tile "></div>
+          <div class="tile "></div>
+          <div class="tile "></div>
+          <div class="tile "></div>
+          <div class="tile "></div>
+          <div class="tile "></div>
+          <div class="tile "></div>
+          <div class="tile "></div>
+          <div class="tile "></div>
+
+          <div class="tile bush"></div> <!-- 3 -->
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile "></div>
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile bush">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile bush"></div> <!-- 3 -->
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile "></div>
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile bush"></div>
+          <div class="tile bush">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile bush">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile bush"></div> <!-- 3 -->
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile "></div>
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile bush"></div>
+          <div class="tile bush">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile "></div>
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile bush">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile bush">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile bush"></div>
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile bush"></div>
+          <div class="tile bush">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile "></div>
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile ">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile "></div>
+          <div class="tile bush">
+            <img src="img/environment/props/tree.png" alt="" />
+          </div>
+          <div class="tile "></div>
+          <div class="tile "></div>
+          <div class="tile bush"></div>
+        </div>
+
+        <div class="fg">
+          <div class="line upper">
+            <!-- SCREEN: 1 -- TILES: 1 > 16 -->
+            <div class="tile"></div>
+            <div class="tile"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+
+            <!-- SCREEN: 2 -- TILES: 17 > 32 -->
+            <div class="tile grass"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile "></div>
+            <div class="tile grass"></div>
+
+            <!-- SCREEN: 3 -- TILES: 33 > 48 -->
+            <div class="tile grass"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile grass"></div>
+
+            <!-- SCREEN: 4 -- TILES: 49 > 64 -->
+            <div class="tile grass"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile grass"></div>
+
+            <!-- SCREEN: 5 -- TILES: 65 > 80 -->
+            <div class="tile grass"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile grass"></div>
+
+            <!-- SCREEN: 6 -- TILES: 81 > 96 -->
+            <div class="tile grass"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile "></div>
+            <div class="tile grass"></div>
+
+            <!-- SCREEN: 7 -- TILES: 97 > 112 -->
+            <div class="tile grass"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile grass"></div>
+
+            <!-- SCREEN: 8 -- TILES: 113 > 128 -->
+            <div class="tile grass"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile grass"></div>
+
+            <!-- SCREEN: 9 -- TILES: 129 > 144 -->
+            <div class="tile grass"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile grass"></div>
+
+            <!-- SCREEN: 10 -- TILES: 145 > 160 -->
+            <div class="tile grass"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile grass"></div>
+
+            <!-- SCREEN: 11 -- TILES: 161 > 176 -->
+            <div class="tile grass"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile grass"></div>
+
+            <!-- SCREEN: 12 -- TILES: 177 > 192 -->
+            <div class="tile grass"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile grass"></div>
+
+            <!-- SCREEN: 13 -- TILES: 193 > 208 -->
+            <div class="tile grass"></div>
+            <div class="tile rock"></div>
+            <div class="tile rock"></div>
+            <div class="tile rock"></div>
+            <div class="tile rock"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile rock"></div>
+            <div class="tile rock"></div>
+            <div class="tile rock"></div>
+            <div class="tile rock"></div>
+            <div class="tile rock"></div>
+            <div class="tile rock"></div>
+            <div class="tile grass"></div>
+
+            <!-- SCREEN: 14 -- TILES: 209 > 224 -->
+            <div class="tile grass"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile grass"></div>
+
+            <!-- SCREEN: 15 -- TILES: 225 > 240 -->
+            <div class="tile grass"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile grass"></div>
+
+            <!-- SCREEN: 16 -- TILES: 241 > 256 -->
+            <div class="tile grass"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile grass"></div>
+
+            <!-- SCREEN: 17 -- TILES: 257 > 272 -->
+            <div class="tile grass"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile grass"></div>
+
+            <!-- SCREEN: 18 -- TILES: 273 > 288 -->
+            <div class="tile grass"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile rock"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile grass"></div>
+
+            <!-- END SCREEN -->
+            <div class="tile grass"></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile "></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+            <div class="tile grass"></div>
+          </div>
+          <div class="line top">
+            <!-- SCREEN: 1 -- TILES: 1 > 16 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 2 -- TILES: 17 > 32 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 3 -- TILES: 33 > 48 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 4 -- TILES: 49 > 64 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 5 -- TILES: 65 > 80 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 6 -- TILES: 81 > 96 -->
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 7 -- TILES: 97 > 112 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 8 -- TILES: 113 > 128 -->
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 9 -- TILES: 129 > 144 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 10 -- TILES: 145 > 160 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 11 -- TILES: 161 > 176 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 12 -- TILES: 177 > 192 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 13 -- TILES: 193 > 208 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 14 -- TILES: 209 > 224 -->
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 15 -- TILES: 225 > 240 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 16 -- TILES: 241 > 256 -->
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 17 -- TILES: 257 > 272 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 18 -- TILES: 273 > 288 -->
+            <div class="tile floor rock"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: END -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+          </div>
+          <div class="line middle">
+            <!-- SCREEN: 1 -- TILES: 1 > 16 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 2 -- TILES: 17 > 32 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 3 -- TILES: 33 > 48 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 4 -- TILES: 49 > 64 -->
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 5 -- TILES: 65 > 80 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 6 -- TILES: 81 > 96 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 7 -- TILES: 97 > 112 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 8 -- TILES: 113 > 128 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+
+            <!-- SCREEN: 9 -- TILES: 129 > 144 -->
+            <div class="tile floor rock"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 10 -- TILES: 145 > 160 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 11 -- TILES: 161 > 176 -->
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 12 -- TILES: 177 > 192 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 13 -- TILES: 193 > 208 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 14 -- TILES: 209 > 224 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+
+            <!-- SCREEN: 15 -- TILES: 225 > 240 -->
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 16 -- TILES: 241 > 256 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 17 -- TILES: 257 > 272 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: 18 -- TILES: 273 > 288 -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor rock"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <!-- SCREEN: END -->
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+          </div>
+          <div class="line bottom">
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+            <div class="tile floor"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="title">
+        <p class="title">
+          <span>Pikachu's</span>
+          <span>Forest Adventure</span>
+        </p>
+
+        <p class="win">
+          <span>You did it !</span>
+          <span>Congratulation</span>
+        </p>
+
+        <p class="fail">
+          <span>You loose !</span>
+        </p>
+
+        <svg id="start" class="button" viewBox="0 0 40 10">
+          <rect x="1" y="1" width="38" height="8" rx="1" />
+          <text x="20" y="6.5" class="title">Click to run</text>
+        </svg>
+
+        <a href="./advanced.html" class="button">
+          <span class="win"  >Start over</span>
+          <span class="fail" >Try again</span>
+        </a>
+
+      </div>
+
+      <div id="caracter">
+        <div class="pikachu"></div>
+      </div>
+    </foreignObject>
+
+    <g class="controls">
+      <rect id="upper"  y="60" width="100%" height="10" />
+      <rect id="top"    y="70" width="100%" height="10" />
+      <rect id="middle" y="80" width="100%" height="10" />
+    </g>
+  </svg>
+</main>

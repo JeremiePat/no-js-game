@@ -1,0 +1,581 @@
+/* ------------------------------------------------------------------------- */
+/* BASIC SETUP
+/* ------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'silkscreen';
+  font-weight: normal;
+  src: url(fonts/slkscr.ttf);
+}
+
+@font-face {
+  font-family: 'silkscreen';
+  font-weight: bold;
+  src: url(fonts/slkscrb.ttf);
+}
+
+:root {
+  --tile:        10px;
+  --tile-width:  16;
+  --tile-height: 10;
+
+  --screen-max:   18;
+  --scene-width:  calc(var(--tile-width) * var(--tile));
+  --scene-height: calc(var(--tile-height) * var(--tile));
+
+  --tile-speed:   150ms;
+  --screen-speed: calc(var(--tile-width) * var(--tile-speed)); /* 2.4s per screen */
+  --run-speed:    calc(var(--screen-max) * var(--screen-speed)); /* 43.2s per run */
+}
+
+html, body {
+  font: 1rem silkscreen, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+
+  background: #333;
+}
+
+main > svg {
+  max-width: 100%;
+  max-height: 500px;
+  position: relative;
+
+  border: 2px solid white;
+}
+
+
+/* ------------------------------------------------------------------------- */
+/* ANIMATIONS
+/* ------------------------------------------------------------------------- */
+
+/* Pikachu idle */
+@keyframes idle {
+  72% { background-position: 0 0; }
+  74% { background-position: calc( -2 * var(--tile)) 0; }
+  76% { background-position: calc( -4 * var(--tile)) 0; }
+  78% { background-position: calc( -6 * var(--tile)) 0; }
+  80% { background-position: calc( -8 * var(--tile)) 0; }
+  82% { background-position: calc(-10 * var(--tile)) 0; }
+  84% { background-position: calc(-12 * var(--tile)) 0; }
+  86% { background-position: calc(-14 * var(--tile)) 0; }
+  88% { background-position: calc(-16 * var(--tile)) 0; }
+  90% { background-position: calc(-18 * var(--tile)) 0; }
+  92% { background-position: calc(-20 * var(--tile)) 0; }
+  94% { background-position: calc(-22 * var(--tile)) 0; }
+  96% { background-position: calc(-24 * var(--tile)) 0; }
+  98% { background-position: calc(-26 * var(--tile)) 0; }
+ 100% { background-position: calc(-28 * var(--tile)) 0; }
+}
+
+/* Pikachu running */
+@keyframes run {
+   0% { background-position:                       0 calc(-2 * var(--tile)); }
+  20% { background-position: calc( -2 * var(--tile)) calc(-2 * var(--tile)); }
+  40% { background-position: calc( -4 * var(--tile)) calc(-2 * var(--tile)); }
+  60% { background-position: calc( -6 * var(--tile)) calc(-2 * var(--tile)); }
+  80% { background-position: calc( -8 * var(--tile)) calc(-2 * var(--tile)); }
+ 100% { background-position: calc(-10 * var(--tile)) calc(-2 * var(--tile)); }
+}
+
+/* Pikachu hurt */
+@keyframes hurt {
+   0% { background-position:                       0 calc(-4 * var(--tile)); }
+  20% { background-position: calc( -2 * var(--tile)) calc(-4 * var(--tile)); }
+  30% { background-position: calc( -4 * var(--tile)) calc(-4 * var(--tile)); }
+  40% { background-position: calc( -6 * var(--tile)) calc(-4 * var(--tile)); }
+  50% { background-position: calc( -8 * var(--tile)) calc(-4 * var(--tile)); }
+  60% { background-position: calc(-10 * var(--tile)) calc(-4 * var(--tile)); }
+  70% { background-position: calc(-12 * var(--tile)) calc(-4 * var(--tile)); }
+  80% { background-position: calc(-14 * var(--tile)) calc(-4 * var(--tile)); }
+  90% { background-position: calc(-16 * var(--tile)) calc(-4 * var(--tile)); }
+ 100% { background-position: calc(-18 * var(--tile)) calc(-4 * var(--tile)); }
+}
+
+/* Pikachu winning */
+@keyframes win {
+  /* 1st running step */
+   0% { background-position:                       0 calc(-2 * var(--tile)); }
+   5% { background-position: calc( -2 * var(--tile)) calc(-2 * var(--tile)); }
+  10% { background-position: calc( -4 * var(--tile)) calc(-2 * var(--tile)); }
+  15% { background-position: calc( -6 * var(--tile)) calc(-2 * var(--tile)); }
+  20% { background-position: calc( -8 * var(--tile)) calc(-2 * var(--tile)); }
+  25% { background-position: calc(-10 * var(--tile)) calc(-2 * var(--tile)); }
+  /* 2nd running step */
+  30% { background-position:                       0 calc(-2 * var(--tile)); }
+  35% { background-position: calc( -2 * var(--tile)) calc(-2 * var(--tile)); }
+  40% { background-position: calc( -4 * var(--tile)) calc(-2 * var(--tile)); }
+  45% { background-position: calc( -6 * var(--tile)) calc(-2 * var(--tile)); }
+  50% { background-position: calc( -8 * var(--tile)) calc(-2 * var(--tile)); }
+  55% { background-position: calc(-10 * var(--tile)) calc(-2 * var(--tile)); }
+  /* Victory danse */
+  60% { background-position:                       0 calc(-6 * var(--tile)); }
+  75% { background-position: calc( -2 * var(--tile)) calc(-6 * var(--tile)); }
+  80% { background-position: calc( -4 * var(--tile)) calc(-6 * var(--tile)); }
+  85% { background-position: calc( -6 * var(--tile)) calc(-6 * var(--tile)); }
+  90% { background-position: calc( -8 * var(--tile)) calc(-6 * var(--tile)); }
+  95% { background-position: calc(-10 * var(--tile)) calc(-6 * var(--tile)); }
+ 100% { background-position: calc( -8 * var(--tile)) calc(-6 * var(--tile)); }
+}
+
+/* Pikachu moving to the right */
+@keyframes moveon {
+ from { transform: translateX(0) }
+ to   { transform: translateX(calc(8 * var(--tile))) }
+}
+
+/* Game forground parallax */
+@keyframes parallax {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-1 * var(--screen-max) * var(--tile-width) * var(--tile))); }
+}
+
+/* Game background parallax */
+@keyframes parallax-slow {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-1 * var(--screen-max)/3 * var(--tile-width) * var(--tile))); }
+}
+
+/* Ending iris screen */
+@keyframes iris {
+  from { clip-path: circle(200px at 110px var(--iris)); }
+  to   { clip-path: circle(0 at 110px var(--iris)); }
+}
+
+/* Ending iris screen */
+@keyframes fadeIn {
+  from { opacity: 0 }
+  to   { opacity: 1 }
+}
+
+
+/* ------------------------------------------------------------------------- */
+/* SET UP TITLE
+/* ------------------------------------------------------------------------- */
+
+#title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width:  var(--scene-width);
+  height: var(--scene-height);
+
+  display: grid;
+  grid-template-columns: repeat(var(--tile-width), var(--tile));
+  grid-template-rows: repeat(var(--tile-height), var(--tile));
+}
+
+#title p {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#title a,
+#title span {
+  display: block;
+}
+
+#title > .title { /* Introduction title */
+  grid-column: 6 / span 11;
+  grid-row: 3;
+}
+
+#title > .win { /* Winning title */
+  display: none;
+  grid-column: 3 / span 9;
+  grid-row: 3;
+}
+
+#title > .fail { /* Winning title */
+  display: none;
+  grid-column: 3 / span 9;
+  grid-row: 4;
+}
+
+#title > .title,
+#title > .win,
+#title > .fail {
+  font-size: 9.4px;
+}
+
+#title .title span:nth-of-type(1) {
+  color: gold;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 10px;
+  transform: translateX(-0.5px);
+}
+
+#title .win span:nth-of-type(1) {
+  font-weight: bold;
+  font-size: 10.95px;
+  line-height: 10px;
+}
+
+#title > .win { color: white; }
+#title > .fail { color: red; }
+
+#title,
+#title .title,
+#title .win,
+#title .fail { display: none; }
+
+#start { /* Start button */
+  display: none;
+  cursor: pointer;
+  grid-column: 12 / span 4;
+  grid-row: 6 / span 1;
+
+  width:  calc(4 * var(--tile));
+  height: calc(1 * var(--tile));
+
+  font-size: 4px;
+
+  border: none;
+}
+
+#start rect {
+  stroke: black;
+  fill: white;
+  stroke-width: 1px;
+}
+
+#start text {
+  text-anchor: middle;
+}
+
+#start:hover rect { stroke: red; }
+#start:hover text { fill: red; }
+
+#title > a {
+  display: none;
+  grid-column: 3 / span 4;
+  grid-row: 5 / span 1;
+
+  text-decoration: none;
+
+  align-items: center;
+  justify-content: center;
+}
+
+#title > a span {
+  display: block;
+  cursor: pointer;
+
+  font-size: 4px;
+  line-height: 6px;
+  text-align: center;
+
+  border: 1px solid black;
+  border-radius: 1px;
+  background: white;
+  color: black;
+
+  box-sizing: border-box;
+  width:  calc(3.8 * var(--tile));
+  height: calc(0.8 * var(--tile));
+}
+
+#title > a:hover span {
+  color: red;
+  border-color: red;
+}
+
+#title > a span {
+  display: none;
+}
+
+
+/* ------------------------------------------------------------------------- */
+/* SET UP CARACTERS
+/* ------------------------------------------------------------------------- */
+
+#caracter {
+  pointer-events: none;
+}
+
+.pikachu {
+  position: absolute;
+  left: 0;
+  bottom: calc((3 * var(--tile)));
+  left: calc(2 * var(--tile));
+
+  width:  calc(2 * var(--tile));
+  height: calc(2 * var(--tile));
+
+  background-image: url(img/pikachu.png);
+  background-position: 0 0;
+  background-size: calc(40 * var(--tile));
+}
+
+
+/* ------------------------------------------------------------------------- */
+/* SET UP SCENE
+/* ------------------------------------------------------------------------- */
+
+.scene {
+  width:  var(--scene-width);
+  height: var(--scene-height);
+  overflow: hidden;
+}
+
+.bg {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+
+.line {
+  display: flex;
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  height: var(--tile);
+}
+
+.line.upper  { bottom: calc(3 * var(--tile)); cursor: pointer; }
+.line.top    { bottom: calc(2 * var(--tile)); cursor: pointer; }
+.line.middle { bottom: var(--tile); cursor: pointer; }
+.line.bottom { bottom: 0; }
+
+.props {
+  display: flex;
+  align-items: flex-end;
+
+  position: absolute;
+  left: 0;
+  bottom: calc(3 * var(--tile));
+}
+
+.tile {
+  width:  var(--tile);
+  height: var(--tile);
+
+  position: relative;
+
+  background-image: url(img/environment/layers/tileset.png);
+  background-size: calc(25 * var(--tile)) calc(23 * var(--tile)); /* 25x23 */
+}
+
+.tile img {
+  position: absolute;
+  bottom: 0;
+}
+
+.tile img[src$="tree.png"] {
+  width: calc(7 * var(--tile));
+  left: calc(-3 * var(--tile));
+}
+
+.tile.floor {
+  background-position: calc( -3 * var(--tile)) calc(-1 * var(--tile));
+}
+
+.tile.grass {
+  background-position: calc( -1 * var(--tile)) calc(-7 * var(--tile));
+}
+
+.tile.rock {
+  background-image: url(img/environment/props/rock.png);
+  background-size: var(--tile) auto;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+}
+
+.tile.floor.rock {
+  background-image: url(img/environment/props/rock.png), url(img/environment/layers/tileset.png);
+  background-size: var(--tile) auto, calc(25 * var(--tile)) calc(23 * var(--tile));
+  background-repeat: no-repeat;
+  background-position: bottom center, calc( -3 * var(--tile)) calc(-1 * var(--tile));
+}
+
+.props .tile {
+  background-image: url(img/environment/layers/props.png);
+  background-size: calc(26 * var(--tile)) calc(14 * var(--tile)); /* 26x14 */
+}
+
+.props .tile.bush {
+  width:  calc(3 * var(--tile));
+  height: calc(2 * var(--tile));
+
+  background-position: calc( -15 * var(--tile)) calc(-6 * var(--tile));
+}
+
+.controls {
+  opacity: 0;
+  cursor: pointer;
+}
+
+
+/* ------------------------------------------------------------------------- */
+/* GAME STATE */
+/* ------------------------------------------------------------------------- */
+
+/* Let's have Pikachu standing on the active line */
+#activeLine.upper  ~ foreignObject .pikachu { bottom: calc(3 * var(--tile) - 1px) }
+#activeLine.top    ~ foreignObject .pikachu { bottom: calc(2 * var(--tile) - 1px) }
+#activeLine.middle ~ foreignObject .pikachu { bottom: calc(1 * var(--tile) - 1px) }
+
+/* The ending iris must center on the active line to focus on Pikachu */
+#activeLine.upper  ~ foreignObject .scene { --iris: 65px; }
+#activeLine.top    ~ foreignObject .scene { --iris: 75px; }
+#activeLine.middle ~ foreignObject .scene { --iris: 85px; }
+
+/* IDLE */
+#gameState.idle ~ foreignObject #title { display: grid; }
+#gameState.idle ~ foreignObject #title .title { display: block; }
+#gameState.idle ~ foreignObject #title #start { display: block; }
+
+#gameState.idle ~ foreignObject .pikachu {
+  animation-name: idle;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: step-start;
+}
+
+/* RUN */
+#gameState.run ~ foreignObject .fg {
+  animation-name: parallax;
+  animation-duration: var(--run-speed);
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+#gameState.run ~ foreignObject .props {
+  animation-name: parallax-slow;
+  animation-duration: var(--run-speed);
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+
+#gameState.run ~ foreignObject .pikachu {
+  animation-name: run;
+  animation-duration: 0.4s;
+  animation-iteration-count: infinite;
+  animation-timing-function: step-start;
+}
+
+/* END: WIN */
+#gameState.end ~ #activeLine.upper  ~ #upperState:not(.crash)  ~ foreignObject #title,
+#gameState.end ~ #activeLine.top    ~ #topState:not(.crash)    ~ foreignObject #title,
+#gameState.end ~ #activeLine.middle ~ #middleState:not(.crash) ~ foreignObject #title {
+  display: grid;
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: .5s;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+}
+
+#gameState.end ~ #activeLine.upper  ~ #upperState:not(.crash)  ~ foreignObject #title .win,
+#gameState.end ~ #activeLine.top    ~ #topState:not(.crash)    ~ foreignObject #title .win,
+#gameState.end ~ #activeLine.middle ~ #middleState:not(.crash) ~ foreignObject #title .win {
+  display: block;
+}
+
+#gameState.end ~ #activeLine.upper  ~ #upperState:not(.crash)  ~ foreignObject #title a,
+#gameState.end ~ #activeLine.top    ~ #topState:not(.crash)    ~ foreignObject #title a,
+#gameState.end ~ #activeLine.middle ~ #middleState:not(.crash) ~ foreignObject #title a {
+  display: block;
+  grid-row-start: 6;
+}
+
+#gameState.end ~ #activeLine.upper  ~ #upperState:not(.crash)  ~ foreignObject .fg,
+#gameState.end ~ #activeLine.top    ~ #topState:not(.crash)    ~ foreignObject .fg,
+#gameState.end ~ #activeLine.middle ~ #middleState:not(.crash) ~ foreignObject .fg {
+  transform: translateX(calc(-1 * var(--screen-max) * var(--scene-width)));
+}
+
+
+#gameState.end ~ #activeLine.upper  ~ #upperState:not(.crash)  ~ foreignObject .props,
+#gameState.end ~ #activeLine.top    ~ #topState:not(.crash)    ~ foreignObject .props,
+#gameState.end ~ #activeLine.middle ~ #middleState:not(.crash) ~ foreignObject .props {
+  transform: translateX(calc(-1 * (var(--screen-max)/3) * var(--scene-width)));
+}
+
+#gameState.end ~ #activeLine.upper  ~ #upperState:not(.crash)  ~ foreignObject .pikachu,
+#gameState.end ~ #activeLine.top    ~ #topState:not(.crash)    ~ foreignObject .pikachu,
+#gameState.end ~ #activeLine.middle ~ #middleState:not(.crash) ~ foreignObject .pikachu {
+  animation-name: moveon, win;
+  animation-duration: 1s, 1.6s;
+  animation-iteration-count: 1, 1;
+  animation-timing-function: linear, step-start;
+  animation-fill-mode: forwards, forwards;
+}
+
+#gameState.end ~ #activeLine.upper  ~ #upperState:not(.crash)  ~ foreignObject .scene,
+#gameState.end ~ #activeLine.top    ~ #topState:not(.crash)    ~ foreignObject .scene,
+#gameState.end ~ #activeLine.middle ~ #middleState:not(.crash) ~ foreignObject .scene {
+  animation-name: iris;
+  animation-duration: 1s;
+  animation-delay: 0.6s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in;
+}
+
+/* END: FAIL */
+#activeLine.upper  ~ #upperState.crash  ~ .controls,
+#activeLine.top    ~ #topState.crash    ~ .controls,
+#activeLine.middle ~ #middleState.crash ~ .controls {
+  display: none;
+}
+
+#activeLine.upper  ~ #upperState.crash  ~ foreignObject #title,
+#activeLine.top    ~ #topState.crash    ~ foreignObject #title,
+#activeLine.middle ~ #middleState.crash ~ foreignObject #title {
+  display: grid;
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-duration: .5s;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+}
+
+#activeLine.upper  ~ #upperState.crash  ~ foreignObject #title .win,
+#activeLine.top    ~ #topState.crash    ~ foreignObject #title .win,
+#activeLine.middle ~ #middleState.crash ~ foreignObject #title .win { display: none; }
+#activeLine.upper  ~ #upperState.crash  ~ foreignObject #title .fail,
+#activeLine.top    ~ #topState.crash    ~ foreignObject #title .fail,
+#activeLine.middle ~ #middleState.crash ~ foreignObject #title .fail { display: block; }
+#activeLine.upper  ~ #upperState.crash  ~ foreignObject #title a,
+#activeLine.top    ~ #topState.crash    ~ foreignObject #title a,
+#activeLine.middle ~ #middleState.crash ~ foreignObject #title a { display: flex; }
+
+#activeLine.upper  ~ #upperState.crash  ~ foreignObject .scene,
+#activeLine.top    ~ #topState.crash    ~ foreignObject .scene,
+#activeLine.middle ~ #middleState.crash ~ foreignObject .scene {
+  animation-name: iris;
+  animation-duration: 1s;
+  animation-delay: 0.6s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+
+#activeLine.upper  ~ #upperState.crash  ~ foreignObject .scene { --iris: 65px; }
+#activeLine.top    ~ #topState.crash    ~ foreignObject .scene { --iris: 75px; }
+#activeLine.middle ~ #middleState.crash ~ foreignObject .scene { --iris: 85px; }
+
+#activeLine.upper  ~ #upperState.crash  ~ foreignObject .pikachu,
+#activeLine.top    ~ #topState.crash    ~ foreignObject .pikachu,
+#activeLine.middle ~ #middleState.crash ~ foreignObject .pikachu {
+  animation-name: moveon, hurt;
+  animation-duration: 1.6s, 0.5s;
+  animation-iteration-count: 1, 1;
+  animation-timing-function: linear, step-start;
+  animation-fill-mode: forwards, forwards;
+}

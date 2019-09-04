@@ -1,0 +1,404 @@
+:root {
+  --tile: 25vmin;
+}
+
+/* ------------------------------------------------------------------------- */
+/* TILES POSITIONNING
+/* ------------------------------------------------------------------------- */
+
+#T12:checked ~ main .tile-1,
+#T22:checked ~ main .tile-2,
+#T32:checked ~ main .tile-3,
+#T42:checked ~ main .tile-4,
+#T52:checked ~ main .tile-5,
+#T62:checked ~ main .tile-6,
+#T72:checked ~ main .tile-7,
+#T82:checked ~ main .tile-8 { transform: translate(calc(1 * var(--tile)), 0) }
+#T13:checked ~ main .tile-1,
+#T23:checked ~ main .tile-2,
+#T33:checked ~ main .tile-3,
+#T43:checked ~ main .tile-4,
+#T53:checked ~ main .tile-5,
+#T63:checked ~ main .tile-6,
+#T73:checked ~ main .tile-7,
+#T83:checked ~ main .tile-8 { transform: translate(calc(2 * var(--tile)), 0) }
+#T14:checked ~ main .tile-1,
+#T24:checked ~ main .tile-2,
+#T34:checked ~ main .tile-3,
+#T44:checked ~ main .tile-4,
+#T54:checked ~ main .tile-5,
+#T64:checked ~ main .tile-6,
+#T74:checked ~ main .tile-7,
+#T84:checked ~ main .tile-8 { transform: translate(0, calc(1 * var(--tile))) }
+#T15:checked ~ main .tile-1,
+#T25:checked ~ main .tile-2,
+#T35:checked ~ main .tile-3,
+#T45:checked ~ main .tile-4,
+#T55:checked ~ main .tile-5,
+#T65:checked ~ main .tile-6,
+#T75:checked ~ main .tile-7,
+#T85:checked ~ main .tile-8 { transform: translate(calc(1 * var(--tile)), calc(1 * var(--tile))) }
+#T16:checked ~ main .tile-1,
+#T26:checked ~ main .tile-2,
+#T36:checked ~ main .tile-3,
+#T46:checked ~ main .tile-4,
+#T56:checked ~ main .tile-5,
+#T66:checked ~ main .tile-6,
+#T76:checked ~ main .tile-7,
+#T86:checked ~ main .tile-8 { transform: translate(calc(2 * var(--tile)), calc(1 * var(--tile))) }
+#T17:checked ~ main .tile-1,
+#T27:checked ~ main .tile-2,
+#T37:checked ~ main .tile-3,
+#T47:checked ~ main .tile-4,
+#T57:checked ~ main .tile-5,
+#T67:checked ~ main .tile-6,
+#T77:checked ~ main .tile-7,
+#T87:checked ~ main .tile-8 { transform: translate(0, calc(2 * var(--tile))) }
+#T18:checked ~ main .tile-1,
+#T28:checked ~ main .tile-2,
+#T38:checked ~ main .tile-3,
+#T48:checked ~ main .tile-4,
+#T58:checked ~ main .tile-5,
+#T68:checked ~ main .tile-6,
+#T78:checked ~ main .tile-7,
+#T88:checked ~ main .tile-8 { transform: translate(calc(1 * var(--tile)), calc(2 * var(--tile))) }
+#T19:checked ~ main .tile-1,
+#T29:checked ~ main .tile-2,
+#T39:checked ~ main .tile-3,
+#T49:checked ~ main .tile-4,
+#T59:checked ~ main .tile-5,
+#T69:checked ~ main .tile-6,
+#T79:checked ~ main .tile-7,
+#T89:checked ~ main .tile-8 { transform: translate(calc(2 * var(--tile)), calc(2 * var(--tile))) }
+
+
+/* ------------------------------------------------------------------------- */
+/* END OF GAME */
+/* ------------------------------------------------------------------------- */
+
+#T11:checked ~ #T22:checked ~ #T33:checked ~ #T44:checked ~ #T55:checked ~ #T66:checked ~ #T77:checked ~ #T88:checked ~ main .newGame {
+  opacity: 1;
+  pointer-events: all;
+}
+#T11:checked ~ #T22:checked ~ #T33:checked ~ #T44:checked ~ #T55:checked ~ #T66:checked ~ #T77:checked ~ #T88:checked ~ main .hint {
+  opacity: 1;
+  background: white;
+}
+#T11:checked ~ #T22:checked ~ #T33:checked ~ #T44:checked ~ #T55:checked ~ #T66:checked ~ #T77:checked ~ #T88:checked ~ main .tile {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+/* ------------------------------------------------------------------------- */
+/* GAME LOGIC
+/* ------------------------------------------------------------------------- */
+/* Each selector allows to select which label is display
+/* in order to push a to the next elmpty slot
+/* ------------------------------------------------------------------------- */
+
+#T12:checked ~ #T21:not(:checked) ~ #T31:not(:checked) ~ #T41:not(:checked) ~ #T51:not(:checked) ~ #T61:not(:checked) ~ #T71:not(:checked) ~ #T81:not(:checked) ~ main label[for=T11],
+#T14:checked ~ #T21:not(:checked) ~ #T31:not(:checked) ~ #T41:not(:checked) ~ #T51:not(:checked) ~ #T61:not(:checked) ~ #T71:not(:checked) ~ #T81:not(:checked) ~ main label[for=T11] { display: block }
+#T11:checked ~ #T22:not(:checked) ~ #T32:not(:checked) ~ #T42:not(:checked) ~ #T52:not(:checked) ~ #T62:not(:checked) ~ #T72:not(:checked) ~ #T82:not(:checked) ~ main label[for=T12],
+#T13:checked ~ #T22:not(:checked) ~ #T32:not(:checked) ~ #T42:not(:checked) ~ #T52:not(:checked) ~ #T62:not(:checked) ~ #T72:not(:checked) ~ #T82:not(:checked) ~ main label[for=T12],
+#T15:checked ~ #T22:not(:checked) ~ #T32:not(:checked) ~ #T42:not(:checked) ~ #T52:not(:checked) ~ #T62:not(:checked) ~ #T72:not(:checked) ~ #T82:not(:checked) ~ main label[for=T12] { display: block }
+#T12:checked ~ #T23:not(:checked) ~ #T33:not(:checked) ~ #T43:not(:checked) ~ #T53:not(:checked) ~ #T63:not(:checked) ~ #T73:not(:checked) ~ #T83:not(:checked) ~ main label[for=T13],
+#T16:checked ~ #T23:not(:checked) ~ #T33:not(:checked) ~ #T43:not(:checked) ~ #T53:not(:checked) ~ #T63:not(:checked) ~ #T73:not(:checked) ~ #T83:not(:checked) ~ main label[for=T13] { display: block }
+#T11:checked ~ #T24:not(:checked) ~ #T34:not(:checked) ~ #T44:not(:checked) ~ #T54:not(:checked) ~ #T64:not(:checked) ~ #T74:not(:checked) ~ #T84:not(:checked) ~ main label[for=T14],
+#T15:checked ~ #T24:not(:checked) ~ #T34:not(:checked) ~ #T44:not(:checked) ~ #T54:not(:checked) ~ #T64:not(:checked) ~ #T74:not(:checked) ~ #T84:not(:checked) ~ main label[for=T14],
+#T17:checked ~ #T24:not(:checked) ~ #T34:not(:checked) ~ #T44:not(:checked) ~ #T54:not(:checked) ~ #T64:not(:checked) ~ #T74:not(:checked) ~ #T84:not(:checked) ~ main label[for=T14] { display: block }
+#T12:checked ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T15],
+#T14:checked ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T15],
+#T16:checked ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T15],
+#T18:checked ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T15] { display: block }
+#T13:checked ~ #T26:not(:checked) ~ #T36:not(:checked) ~ #T46:not(:checked) ~ #T56:not(:checked) ~ #T66:not(:checked) ~ #T76:not(:checked) ~ #T86:not(:checked) ~ main label[for=T16],
+#T15:checked ~ #T26:not(:checked) ~ #T36:not(:checked) ~ #T46:not(:checked) ~ #T56:not(:checked) ~ #T66:not(:checked) ~ #T76:not(:checked) ~ #T86:not(:checked) ~ main label[for=T16],
+#T19:checked ~ #T26:not(:checked) ~ #T36:not(:checked) ~ #T46:not(:checked) ~ #T56:not(:checked) ~ #T66:not(:checked) ~ #T76:not(:checked) ~ #T86:not(:checked) ~ main label[for=T16] { display: block }
+#T14:checked ~ #T27:not(:checked) ~ #T37:not(:checked) ~ #T47:not(:checked) ~ #T57:not(:checked) ~ #T67:not(:checked) ~ #T77:not(:checked) ~ #T87:not(:checked) ~ main label[for=T17],
+#T18:checked ~ #T27:not(:checked) ~ #T37:not(:checked) ~ #T47:not(:checked) ~ #T57:not(:checked) ~ #T67:not(:checked) ~ #T77:not(:checked) ~ #T87:not(:checked) ~ main label[for=T17] { display: block }
+#T15:checked ~ #T28:not(:checked) ~ #T38:not(:checked) ~ #T48:not(:checked) ~ #T58:not(:checked) ~ #T68:not(:checked) ~ #T78:not(:checked) ~ #T88:not(:checked) ~ main label[for=T18],
+#T17:checked ~ #T28:not(:checked) ~ #T38:not(:checked) ~ #T48:not(:checked) ~ #T58:not(:checked) ~ #T68:not(:checked) ~ #T78:not(:checked) ~ #T88:not(:checked) ~ main label[for=T18],
+#T19:checked ~ #T28:not(:checked) ~ #T38:not(:checked) ~ #T48:not(:checked) ~ #T58:not(:checked) ~ #T68:not(:checked) ~ #T78:not(:checked) ~ #T88:not(:checked) ~ main label[for=T18] { display: block }
+#T16:checked ~ #T29:not(:checked) ~ #T39:not(:checked) ~ #T49:not(:checked) ~ #T59:not(:checked) ~ #T69:not(:checked) ~ #T79:not(:checked) ~ #T89:not(:checked) ~ main label[for=T19],
+#T18:checked ~ #T29:not(:checked) ~ #T39:not(:checked) ~ #T49:not(:checked) ~ #T59:not(:checked) ~ #T69:not(:checked) ~ #T79:not(:checked) ~ #T89:not(:checked) ~ main label[for=T19] { display: block }
+
+#T11:not(:checked) ~ #T22:checked ~ #T31:not(:checked) ~ #T41:not(:checked) ~ #T51:not(:checked) ~ #T61:not(:checked) ~ #T71:not(:checked) ~ #T81:not(:checked) ~ main label[for=T21],
+#T11:not(:checked) ~ #T24:checked ~ #T31:not(:checked) ~ #T41:not(:checked) ~ #T51:not(:checked) ~ #T61:not(:checked) ~ #T71:not(:checked) ~ #T81:not(:checked) ~ main label[for=T21] { display: block }
+#T12:not(:checked) ~ #T21:checked ~ #T32:not(:checked) ~ #T42:not(:checked) ~ #T52:not(:checked) ~ #T62:not(:checked) ~ #T72:not(:checked) ~ #T82:not(:checked) ~ main label[for=T22],
+#T12:not(:checked) ~ #T23:checked ~ #T32:not(:checked) ~ #T42:not(:checked) ~ #T52:not(:checked) ~ #T62:not(:checked) ~ #T72:not(:checked) ~ #T82:not(:checked) ~ main label[for=T22],
+#T12:not(:checked) ~ #T25:checked ~ #T32:not(:checked) ~ #T42:not(:checked) ~ #T52:not(:checked) ~ #T62:not(:checked) ~ #T72:not(:checked) ~ #T82:not(:checked) ~ main label[for=T22] { display: block }
+#T13:not(:checked) ~ #T22:checked ~ #T33:not(:checked) ~ #T43:not(:checked) ~ #T53:not(:checked) ~ #T63:not(:checked) ~ #T73:not(:checked) ~ #T83:not(:checked) ~ main label[for=T23],
+#T13:not(:checked) ~ #T26:checked ~ #T33:not(:checked) ~ #T43:not(:checked) ~ #T53:not(:checked) ~ #T63:not(:checked) ~ #T73:not(:checked) ~ #T83:not(:checked) ~ main label[for=T23] { display: block }
+#T14:not(:checked) ~ #T21:checked ~ #T34:not(:checked) ~ #T44:not(:checked) ~ #T54:not(:checked) ~ #T64:not(:checked) ~ #T74:not(:checked) ~ #T84:not(:checked) ~ main label[for=T24],
+#T14:not(:checked) ~ #T25:checked ~ #T34:not(:checked) ~ #T44:not(:checked) ~ #T54:not(:checked) ~ #T64:not(:checked) ~ #T74:not(:checked) ~ #T84:not(:checked) ~ main label[for=T24],
+#T14:not(:checked) ~ #T27:checked ~ #T34:not(:checked) ~ #T44:not(:checked) ~ #T54:not(:checked) ~ #T64:not(:checked) ~ #T74:not(:checked) ~ #T84:not(:checked) ~ main label[for=T24] { display: block }
+#T15:not(:checked) ~ #T22:checked ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T25],
+#T15:not(:checked) ~ #T24:checked ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T25],
+#T15:not(:checked) ~ #T26:checked ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T25],
+#T15:not(:checked) ~ #T28:checked ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T25] { display: block }
+#T16:not(:checked) ~ #T23:checked ~ #T36:not(:checked) ~ #T46:not(:checked) ~ #T56:not(:checked) ~ #T66:not(:checked) ~ #T76:not(:checked) ~ #T86:not(:checked) ~ main label[for=T26],
+#T16:not(:checked) ~ #T25:checked ~ #T36:not(:checked) ~ #T46:not(:checked) ~ #T56:not(:checked) ~ #T66:not(:checked) ~ #T76:not(:checked) ~ #T86:not(:checked) ~ main label[for=T26],
+#T16:not(:checked) ~ #T29:checked ~ #T36:not(:checked) ~ #T46:not(:checked) ~ #T56:not(:checked) ~ #T66:not(:checked) ~ #T76:not(:checked) ~ #T86:not(:checked) ~ main label[for=T26] { display: block }
+#T17:not(:checked) ~ #T24:checked ~ #T37:not(:checked) ~ #T47:not(:checked) ~ #T57:not(:checked) ~ #T67:not(:checked) ~ #T77:not(:checked) ~ #T87:not(:checked) ~ main label[for=T27],
+#T17:not(:checked) ~ #T28:checked ~ #T37:not(:checked) ~ #T47:not(:checked) ~ #T57:not(:checked) ~ #T67:not(:checked) ~ #T77:not(:checked) ~ #T87:not(:checked) ~ main label[for=T27] { display: block }
+#T18:not(:checked) ~ #T25:checked ~ #T38:not(:checked) ~ #T48:not(:checked) ~ #T58:not(:checked) ~ #T68:not(:checked) ~ #T78:not(:checked) ~ #T88:not(:checked) ~ main label[for=T28],
+#T18:not(:checked) ~ #T27:checked ~ #T38:not(:checked) ~ #T48:not(:checked) ~ #T58:not(:checked) ~ #T68:not(:checked) ~ #T78:not(:checked) ~ #T88:not(:checked) ~ main label[for=T28],
+#T18:not(:checked) ~ #T29:checked ~ #T38:not(:checked) ~ #T48:not(:checked) ~ #T58:not(:checked) ~ #T68:not(:checked) ~ #T78:not(:checked) ~ #T88:not(:checked) ~ main label[for=T28] { display: block }
+#T19:not(:checked) ~ #T26:checked ~ #T39:not(:checked) ~ #T49:not(:checked) ~ #T59:not(:checked) ~ #T69:not(:checked) ~ #T79:not(:checked) ~ #T89:not(:checked) ~ main label[for=T29],
+#T19:not(:checked) ~ #T28:checked ~ #T39:not(:checked) ~ #T49:not(:checked) ~ #T59:not(:checked) ~ #T69:not(:checked) ~ #T79:not(:checked) ~ #T89:not(:checked) ~ main label[for=T29] { display: block }
+
+#T11:not(:checked) ~ #T21:not(:checked) ~ #T32:checked ~ #T41:not(:checked) ~ #T51:not(:checked) ~ #T61:not(:checked) ~ #T71:not(:checked) ~ #T81:not(:checked) ~ main label[for=T31],
+#T11:not(:checked) ~ #T21:not(:checked) ~ #T34:checked ~ #T41:not(:checked) ~ #T51:not(:checked) ~ #T61:not(:checked) ~ #T71:not(:checked) ~ #T81:not(:checked) ~ main label[for=T31] { display: block }
+#T12:not(:checked) ~ #T22:not(:checked) ~ #T31:checked ~ #T42:not(:checked) ~ #T52:not(:checked) ~ #T62:not(:checked) ~ #T72:not(:checked) ~ #T82:not(:checked) ~ main label[for=T32],
+#T12:not(:checked) ~ #T22:not(:checked) ~ #T33:checked ~ #T42:not(:checked) ~ #T52:not(:checked) ~ #T62:not(:checked) ~ #T72:not(:checked) ~ #T82:not(:checked) ~ main label[for=T32],
+#T12:not(:checked) ~ #T22:not(:checked) ~ #T35:checked ~ #T42:not(:checked) ~ #T52:not(:checked) ~ #T62:not(:checked) ~ #T72:not(:checked) ~ #T82:not(:checked) ~ main label[for=T32] { display: block }
+#T13:not(:checked) ~ #T23:not(:checked) ~ #T32:checked ~ #T43:not(:checked) ~ #T53:not(:checked) ~ #T63:not(:checked) ~ #T73:not(:checked) ~ #T83:not(:checked) ~ main label[for=T33],
+#T13:not(:checked) ~ #T23:not(:checked) ~ #T36:checked ~ #T43:not(:checked) ~ #T53:not(:checked) ~ #T63:not(:checked) ~ #T73:not(:checked) ~ #T83:not(:checked) ~ main label[for=T33] { display: block }
+#T14:not(:checked) ~ #T24:not(:checked) ~ #T31:checked ~ #T44:not(:checked) ~ #T54:not(:checked) ~ #T64:not(:checked) ~ #T74:not(:checked) ~ #T84:not(:checked) ~ main label[for=T34],
+#T14:not(:checked) ~ #T24:not(:checked) ~ #T35:checked ~ #T44:not(:checked) ~ #T54:not(:checked) ~ #T64:not(:checked) ~ #T74:not(:checked) ~ #T84:not(:checked) ~ main label[for=T34],
+#T14:not(:checked) ~ #T24:not(:checked) ~ #T37:checked ~ #T44:not(:checked) ~ #T54:not(:checked) ~ #T64:not(:checked) ~ #T74:not(:checked) ~ #T84:not(:checked) ~ main label[for=T34] { display: block }
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T32:checked ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T35],
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T34:checked ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T35],
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T36:checked ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T35],
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T38:checked ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T35] { display: block }
+#T16:not(:checked) ~ #T26:not(:checked) ~ #T33:checked ~ #T46:not(:checked) ~ #T56:not(:checked) ~ #T66:not(:checked) ~ #T76:not(:checked) ~ #T86:not(:checked) ~ main label[for=T36],
+#T16:not(:checked) ~ #T26:not(:checked) ~ #T35:checked ~ #T46:not(:checked) ~ #T56:not(:checked) ~ #T66:not(:checked) ~ #T76:not(:checked) ~ #T86:not(:checked) ~ main label[for=T36],
+#T16:not(:checked) ~ #T26:not(:checked) ~ #T39:checked ~ #T46:not(:checked) ~ #T56:not(:checked) ~ #T66:not(:checked) ~ #T76:not(:checked) ~ #T86:not(:checked) ~ main label[for=T36] { display: block }
+#T17:not(:checked) ~ #T27:not(:checked) ~ #T34:checked ~ #T47:not(:checked) ~ #T57:not(:checked) ~ #T67:not(:checked) ~ #T77:not(:checked) ~ #T87:not(:checked) ~ main label[for=T37],
+#T17:not(:checked) ~ #T27:not(:checked) ~ #T38:checked ~ #T47:not(:checked) ~ #T57:not(:checked) ~ #T67:not(:checked) ~ #T77:not(:checked) ~ #T87:not(:checked) ~ main label[for=T37] { display: block }
+#T18:not(:checked) ~ #T28:not(:checked) ~ #T35:checked ~ #T48:not(:checked) ~ #T58:not(:checked) ~ #T68:not(:checked) ~ #T78:not(:checked) ~ #T88:not(:checked) ~ main label[for=T38],
+#T18:not(:checked) ~ #T28:not(:checked) ~ #T37:checked ~ #T48:not(:checked) ~ #T58:not(:checked) ~ #T68:not(:checked) ~ #T78:not(:checked) ~ #T88:not(:checked) ~ main label[for=T38],
+#T18:not(:checked) ~ #T28:not(:checked) ~ #T39:checked ~ #T48:not(:checked) ~ #T58:not(:checked) ~ #T68:not(:checked) ~ #T78:not(:checked) ~ #T88:not(:checked) ~ main label[for=T38] { display: block }
+#T19:not(:checked) ~ #T29:not(:checked) ~ #T36:checked ~ #T49:not(:checked) ~ #T59:not(:checked) ~ #T69:not(:checked) ~ #T79:not(:checked) ~ #T89:not(:checked) ~ main label[for=T39],
+#T19:not(:checked) ~ #T29:not(:checked) ~ #T38:checked ~ #T49:not(:checked) ~ #T59:not(:checked) ~ #T69:not(:checked) ~ #T79:not(:checked) ~ #T89:not(:checked) ~ main label[for=T39] { display: block }
+
+#T11:not(:checked) ~ #T21:not(:checked) ~ #T31:not(:checked) ~ #T42:checked ~ #T51:not(:checked) ~ #T61:not(:checked) ~ #T71:not(:checked) ~ #T81:not(:checked) ~ main label[for=T41],
+#T11:not(:checked) ~ #T21:not(:checked) ~ #T31:not(:checked) ~ #T44:checked ~ #T51:not(:checked) ~ #T61:not(:checked) ~ #T71:not(:checked) ~ #T81:not(:checked) ~ main label[for=T41] { display: block }
+#T12:not(:checked) ~ #T22:not(:checked) ~ #T32:not(:checked) ~ #T41:checked ~ #T52:not(:checked) ~ #T62:not(:checked) ~ #T72:not(:checked) ~ #T82:not(:checked) ~ main label[for=T42],
+#T12:not(:checked) ~ #T22:not(:checked) ~ #T32:not(:checked) ~ #T43:checked ~ #T52:not(:checked) ~ #T62:not(:checked) ~ #T72:not(:checked) ~ #T82:not(:checked) ~ main label[for=T42],
+#T12:not(:checked) ~ #T22:not(:checked) ~ #T32:not(:checked) ~ #T45:checked ~ #T52:not(:checked) ~ #T62:not(:checked) ~ #T72:not(:checked) ~ #T82:not(:checked) ~ main label[for=T42] { display: block }
+#T13:not(:checked) ~ #T23:not(:checked) ~ #T33:not(:checked) ~ #T42:checked ~ #T53:not(:checked) ~ #T63:not(:checked) ~ #T73:not(:checked) ~ #T83:not(:checked) ~ main label[for=T43],
+#T13:not(:checked) ~ #T23:not(:checked) ~ #T33:not(:checked) ~ #T46:checked ~ #T53:not(:checked) ~ #T63:not(:checked) ~ #T73:not(:checked) ~ #T83:not(:checked) ~ main label[for=T43] { display: block }
+#T14:not(:checked) ~ #T24:not(:checked) ~ #T34:not(:checked) ~ #T41:checked ~ #T54:not(:checked) ~ #T64:not(:checked) ~ #T74:not(:checked) ~ #T84:not(:checked) ~ main label[for=T44],
+#T14:not(:checked) ~ #T24:not(:checked) ~ #T34:not(:checked) ~ #T45:checked ~ #T54:not(:checked) ~ #T64:not(:checked) ~ #T74:not(:checked) ~ #T84:not(:checked) ~ main label[for=T44],
+#T14:not(:checked) ~ #T24:not(:checked) ~ #T34:not(:checked) ~ #T47:checked ~ #T54:not(:checked) ~ #T64:not(:checked) ~ #T74:not(:checked) ~ #T84:not(:checked) ~ main label[for=T44] { display: block }
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T42:checked ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T45],
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T44:checked ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T45],
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T46:checked ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T45],
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T48:checked ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T45] { display: block }
+#T16:not(:checked) ~ #T26:not(:checked) ~ #T36:not(:checked) ~ #T43:checked ~ #T56:not(:checked) ~ #T66:not(:checked) ~ #T76:not(:checked) ~ #T86:not(:checked) ~ main label[for=T46],
+#T16:not(:checked) ~ #T26:not(:checked) ~ #T36:not(:checked) ~ #T45:checked ~ #T56:not(:checked) ~ #T66:not(:checked) ~ #T76:not(:checked) ~ #T86:not(:checked) ~ main label[for=T46],
+#T16:not(:checked) ~ #T26:not(:checked) ~ #T36:not(:checked) ~ #T49:checked ~ #T56:not(:checked) ~ #T66:not(:checked) ~ #T76:not(:checked) ~ #T86:not(:checked) ~ main label[for=T46] { display: block }
+#T17:not(:checked) ~ #T27:not(:checked) ~ #T37:not(:checked) ~ #T44:checked ~ #T57:not(:checked) ~ #T67:not(:checked) ~ #T77:not(:checked) ~ #T87:not(:checked) ~ main label[for=T47],
+#T17:not(:checked) ~ #T27:not(:checked) ~ #T37:not(:checked) ~ #T48:checked ~ #T57:not(:checked) ~ #T67:not(:checked) ~ #T77:not(:checked) ~ #T87:not(:checked) ~ main label[for=T47] { display: block }
+#T18:not(:checked) ~ #T28:not(:checked) ~ #T38:not(:checked) ~ #T45:checked ~ #T58:not(:checked) ~ #T68:not(:checked) ~ #T78:not(:checked) ~ #T88:not(:checked) ~ main label[for=T48],
+#T18:not(:checked) ~ #T28:not(:checked) ~ #T38:not(:checked) ~ #T47:checked ~ #T58:not(:checked) ~ #T68:not(:checked) ~ #T78:not(:checked) ~ #T88:not(:checked) ~ main label[for=T48],
+#T18:not(:checked) ~ #T28:not(:checked) ~ #T38:not(:checked) ~ #T49:checked ~ #T58:not(:checked) ~ #T68:not(:checked) ~ #T78:not(:checked) ~ #T88:not(:checked) ~ main label[for=T48] { display: block }
+#T19:not(:checked) ~ #T29:not(:checked) ~ #T39:not(:checked) ~ #T46:checked ~ #T59:not(:checked) ~ #T69:not(:checked) ~ #T79:not(:checked) ~ #T89:not(:checked) ~ main label[for=T49],
+#T19:not(:checked) ~ #T29:not(:checked) ~ #T39:not(:checked) ~ #T48:checked ~ #T59:not(:checked) ~ #T69:not(:checked) ~ #T79:not(:checked) ~ #T89:not(:checked) ~ main label[for=T49] { display: block }
+
+#T11:not(:checked) ~ #T21:not(:checked) ~ #T31:not(:checked) ~ #T41:not(:checked) ~ #T52:checked ~ #T61:not(:checked) ~ #T71:not(:checked) ~ #T81:not(:checked) ~ main label[for=T51],
+#T11:not(:checked) ~ #T21:not(:checked) ~ #T31:not(:checked) ~ #T41:not(:checked) ~ #T54:checked ~ #T61:not(:checked) ~ #T71:not(:checked) ~ #T81:not(:checked) ~ main label[for=T51] { display: block }
+#T12:not(:checked) ~ #T22:not(:checked) ~ #T32:not(:checked) ~ #T42:not(:checked) ~ #T51:checked ~ #T62:not(:checked) ~ #T72:not(:checked) ~ #T82:not(:checked) ~ main label[for=T52],
+#T12:not(:checked) ~ #T22:not(:checked) ~ #T32:not(:checked) ~ #T42:not(:checked) ~ #T53:checked ~ #T62:not(:checked) ~ #T72:not(:checked) ~ #T82:not(:checked) ~ main label[for=T52],
+#T12:not(:checked) ~ #T22:not(:checked) ~ #T32:not(:checked) ~ #T42:not(:checked) ~ #T55:checked ~ #T62:not(:checked) ~ #T72:not(:checked) ~ #T82:not(:checked) ~ main label[for=T52] { display: block }
+#T13:not(:checked) ~ #T23:not(:checked) ~ #T33:not(:checked) ~ #T43:not(:checked) ~ #T52:checked ~ #T63:not(:checked) ~ #T73:not(:checked) ~ #T83:not(:checked) ~ main label[for=T53],
+#T13:not(:checked) ~ #T23:not(:checked) ~ #T33:not(:checked) ~ #T43:not(:checked) ~ #T56:checked ~ #T63:not(:checked) ~ #T73:not(:checked) ~ #T83:not(:checked) ~ main label[for=T53] { display: block }
+#T14:not(:checked) ~ #T24:not(:checked) ~ #T34:not(:checked) ~ #T44:not(:checked) ~ #T51:checked ~ #T64:not(:checked) ~ #T74:not(:checked) ~ #T84:not(:checked) ~ main label[for=T54],
+#T14:not(:checked) ~ #T24:not(:checked) ~ #T34:not(:checked) ~ #T44:not(:checked) ~ #T55:checked ~ #T64:not(:checked) ~ #T74:not(:checked) ~ #T84:not(:checked) ~ main label[for=T54],
+#T14:not(:checked) ~ #T24:not(:checked) ~ #T34:not(:checked) ~ #T44:not(:checked) ~ #T57:checked ~ #T64:not(:checked) ~ #T74:not(:checked) ~ #T84:not(:checked) ~ main label[for=T54] { display: block }
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T52:checked ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T55],
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T54:checked ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T55],
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T56:checked ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T55],
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T58:checked ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T55] { display: block }
+#T16:not(:checked) ~ #T26:not(:checked) ~ #T36:not(:checked) ~ #T46:not(:checked) ~ #T53:checked ~ #T66:not(:checked) ~ #T76:not(:checked) ~ #T86:not(:checked) ~ main label[for=T56],
+#T16:not(:checked) ~ #T26:not(:checked) ~ #T36:not(:checked) ~ #T46:not(:checked) ~ #T55:checked ~ #T66:not(:checked) ~ #T76:not(:checked) ~ #T86:not(:checked) ~ main label[for=T56],
+#T16:not(:checked) ~ #T26:not(:checked) ~ #T36:not(:checked) ~ #T46:not(:checked) ~ #T59:checked ~ #T66:not(:checked) ~ #T76:not(:checked) ~ #T86:not(:checked) ~ main label[for=T56] { display: block }
+#T17:not(:checked) ~ #T27:not(:checked) ~ #T37:not(:checked) ~ #T47:not(:checked) ~ #T54:checked ~ #T67:not(:checked) ~ #T77:not(:checked) ~ #T87:not(:checked) ~ main label[for=T57],
+#T17:not(:checked) ~ #T27:not(:checked) ~ #T37:not(:checked) ~ #T47:not(:checked) ~ #T58:checked ~ #T67:not(:checked) ~ #T77:not(:checked) ~ #T87:not(:checked) ~ main label[for=T57] { display: block }
+#T18:not(:checked) ~ #T28:not(:checked) ~ #T38:not(:checked) ~ #T48:not(:checked) ~ #T55:checked ~ #T68:not(:checked) ~ #T78:not(:checked) ~ #T88:not(:checked) ~ main label[for=T58],
+#T18:not(:checked) ~ #T28:not(:checked) ~ #T38:not(:checked) ~ #T48:not(:checked) ~ #T57:checked ~ #T68:not(:checked) ~ #T78:not(:checked) ~ #T88:not(:checked) ~ main label[for=T58],
+#T18:not(:checked) ~ #T28:not(:checked) ~ #T38:not(:checked) ~ #T48:not(:checked) ~ #T59:checked ~ #T68:not(:checked) ~ #T78:not(:checked) ~ #T88:not(:checked) ~ main label[for=T58] { display: block }
+#T19:not(:checked) ~ #T29:not(:checked) ~ #T39:not(:checked) ~ #T49:not(:checked) ~ #T56:checked ~ #T69:not(:checked) ~ #T79:not(:checked) ~ #T89:not(:checked) ~ main label[for=T59],
+#T19:not(:checked) ~ #T29:not(:checked) ~ #T39:not(:checked) ~ #T49:not(:checked) ~ #T58:checked ~ #T69:not(:checked) ~ #T79:not(:checked) ~ #T89:not(:checked) ~ main label[for=T59] { display: block }
+
+#T11:not(:checked) ~ #T21:not(:checked) ~ #T31:not(:checked) ~ #T41:not(:checked) ~ #T51:not(:checked) ~ #T62:checked ~ #T71:not(:checked) ~ #T81:not(:checked) ~ main label[for=T61],
+#T11:not(:checked) ~ #T21:not(:checked) ~ #T31:not(:checked) ~ #T41:not(:checked) ~ #T51:not(:checked) ~ #T64:checked ~ #T71:not(:checked) ~ #T81:not(:checked) ~ main label[for=T61] { display: block }
+#T12:not(:checked) ~ #T22:not(:checked) ~ #T32:not(:checked) ~ #T42:not(:checked) ~ #T52:not(:checked) ~ #T61:checked ~ #T72:not(:checked) ~ #T82:not(:checked) ~ main label[for=T62],
+#T12:not(:checked) ~ #T22:not(:checked) ~ #T32:not(:checked) ~ #T42:not(:checked) ~ #T52:not(:checked) ~ #T63:checked ~ #T72:not(:checked) ~ #T82:not(:checked) ~ main label[for=T62],
+#T12:not(:checked) ~ #T22:not(:checked) ~ #T32:not(:checked) ~ #T42:not(:checked) ~ #T52:not(:checked) ~ #T65:checked ~ #T72:not(:checked) ~ #T82:not(:checked) ~ main label[for=T62] { display: block }
+#T13:not(:checked) ~ #T23:not(:checked) ~ #T33:not(:checked) ~ #T43:not(:checked) ~ #T53:not(:checked) ~ #T62:checked ~ #T73:not(:checked) ~ #T83:not(:checked) ~ main label[for=T63],
+#T13:not(:checked) ~ #T23:not(:checked) ~ #T33:not(:checked) ~ #T43:not(:checked) ~ #T53:not(:checked) ~ #T66:checked ~ #T73:not(:checked) ~ #T83:not(:checked) ~ main label[for=T63] { display: block }
+#T14:not(:checked) ~ #T24:not(:checked) ~ #T34:not(:checked) ~ #T44:not(:checked) ~ #T54:not(:checked) ~ #T61:checked ~ #T74:not(:checked) ~ #T84:not(:checked) ~ main label[for=T64],
+#T14:not(:checked) ~ #T24:not(:checked) ~ #T34:not(:checked) ~ #T44:not(:checked) ~ #T54:not(:checked) ~ #T65:checked ~ #T74:not(:checked) ~ #T84:not(:checked) ~ main label[for=T64],
+#T14:not(:checked) ~ #T24:not(:checked) ~ #T34:not(:checked) ~ #T44:not(:checked) ~ #T54:not(:checked) ~ #T67:checked ~ #T74:not(:checked) ~ #T84:not(:checked) ~ main label[for=T64] { display: block }
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T62:checked ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T65],
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T64:checked ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T65],
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T66:checked ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T65],
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T68:checked ~ #T75:not(:checked) ~ #T85:not(:checked) ~ main label[for=T65] { display: block }
+#T16:not(:checked) ~ #T26:not(:checked) ~ #T36:not(:checked) ~ #T46:not(:checked) ~ #T56:not(:checked) ~ #T63:checked ~ #T76:not(:checked) ~ #T86:not(:checked) ~ main label[for=T66],
+#T16:not(:checked) ~ #T26:not(:checked) ~ #T36:not(:checked) ~ #T46:not(:checked) ~ #T56:not(:checked) ~ #T65:checked ~ #T76:not(:checked) ~ #T86:not(:checked) ~ main label[for=T66],
+#T16:not(:checked) ~ #T26:not(:checked) ~ #T36:not(:checked) ~ #T46:not(:checked) ~ #T56:not(:checked) ~ #T69:checked ~ #T76:not(:checked) ~ #T86:not(:checked) ~ main label[for=T66] { display: block }
+#T17:not(:checked) ~ #T27:not(:checked) ~ #T37:not(:checked) ~ #T47:not(:checked) ~ #T57:not(:checked) ~ #T64:checked ~ #T77:not(:checked) ~ #T87:not(:checked) ~ main label[for=T67],
+#T17:not(:checked) ~ #T27:not(:checked) ~ #T37:not(:checked) ~ #T47:not(:checked) ~ #T57:not(:checked) ~ #T68:checked ~ #T77:not(:checked) ~ #T87:not(:checked) ~ main label[for=T67] { display: block }
+#T18:not(:checked) ~ #T28:not(:checked) ~ #T38:not(:checked) ~ #T48:not(:checked) ~ #T58:not(:checked) ~ #T65:checked ~ #T78:not(:checked) ~ #T88:not(:checked) ~ main label[for=T68],
+#T18:not(:checked) ~ #T28:not(:checked) ~ #T38:not(:checked) ~ #T48:not(:checked) ~ #T58:not(:checked) ~ #T67:checked ~ #T78:not(:checked) ~ #T88:not(:checked) ~ main label[for=T68],
+#T18:not(:checked) ~ #T28:not(:checked) ~ #T38:not(:checked) ~ #T48:not(:checked) ~ #T58:not(:checked) ~ #T69:checked ~ #T78:not(:checked) ~ #T88:not(:checked) ~ main label[for=T68] { display: block }
+#T19:not(:checked) ~ #T29:not(:checked) ~ #T39:not(:checked) ~ #T49:not(:checked) ~ #T59:not(:checked) ~ #T66:checked ~ #T79:not(:checked) ~ #T89:not(:checked) ~ main label[for=T69],
+#T19:not(:checked) ~ #T29:not(:checked) ~ #T39:not(:checked) ~ #T49:not(:checked) ~ #T59:not(:checked) ~ #T68:checked ~ #T79:not(:checked) ~ #T89:not(:checked) ~ main label[for=T69] { display: block }
+
+#T11:not(:checked) ~ #T21:not(:checked) ~ #T31:not(:checked) ~ #T41:not(:checked) ~ #T51:not(:checked) ~ #T61:not(:checked) ~ #T72:checked ~ #T81:not(:checked) ~ main label[for=T71],
+#T11:not(:checked) ~ #T21:not(:checked) ~ #T31:not(:checked) ~ #T41:not(:checked) ~ #T51:not(:checked) ~ #T61:not(:checked) ~ #T74:checked ~ #T81:not(:checked) ~ main label[for=T71] { display: block }
+#T12:not(:checked) ~ #T22:not(:checked) ~ #T32:not(:checked) ~ #T42:not(:checked) ~ #T52:not(:checked) ~ #T62:not(:checked) ~ #T71:checked ~ #T82:not(:checked) ~ main label[for=T72],
+#T12:not(:checked) ~ #T22:not(:checked) ~ #T32:not(:checked) ~ #T42:not(:checked) ~ #T52:not(:checked) ~ #T62:not(:checked) ~ #T73:checked ~ #T82:not(:checked) ~ main label[for=T72],
+#T12:not(:checked) ~ #T22:not(:checked) ~ #T32:not(:checked) ~ #T42:not(:checked) ~ #T52:not(:checked) ~ #T62:not(:checked) ~ #T75:checked ~ #T82:not(:checked) ~ main label[for=T72] { display: block }
+#T13:not(:checked) ~ #T23:not(:checked) ~ #T33:not(:checked) ~ #T43:not(:checked) ~ #T53:not(:checked) ~ #T63:not(:checked) ~ #T72:checked ~ #T83:not(:checked) ~ main label[for=T73],
+#T13:not(:checked) ~ #T23:not(:checked) ~ #T33:not(:checked) ~ #T43:not(:checked) ~ #T53:not(:checked) ~ #T63:not(:checked) ~ #T76:checked ~ #T83:not(:checked) ~ main label[for=T73] { display: block }
+#T14:not(:checked) ~ #T24:not(:checked) ~ #T34:not(:checked) ~ #T44:not(:checked) ~ #T54:not(:checked) ~ #T64:not(:checked) ~ #T71:checked ~ #T84:not(:checked) ~ main label[for=T74],
+#T14:not(:checked) ~ #T24:not(:checked) ~ #T34:not(:checked) ~ #T44:not(:checked) ~ #T54:not(:checked) ~ #T64:not(:checked) ~ #T75:checked ~ #T84:not(:checked) ~ main label[for=T74],
+#T14:not(:checked) ~ #T24:not(:checked) ~ #T34:not(:checked) ~ #T44:not(:checked) ~ #T54:not(:checked) ~ #T64:not(:checked) ~ #T77:checked ~ #T84:not(:checked) ~ main label[for=T74] { display: block }
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T72:checked ~ #T85:not(:checked) ~ main label[for=T75],
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T74:checked ~ #T85:not(:checked) ~ main label[for=T75],
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T76:checked ~ #T85:not(:checked) ~ main label[for=T75],
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T78:checked ~ #T85:not(:checked) ~ main label[for=T75] { display: block }
+#T16:not(:checked) ~ #T26:not(:checked) ~ #T36:not(:checked) ~ #T46:not(:checked) ~ #T56:not(:checked) ~ #T66:not(:checked) ~ #T73:checked ~ #T86:not(:checked) ~ main label[for=T76],
+#T16:not(:checked) ~ #T26:not(:checked) ~ #T36:not(:checked) ~ #T46:not(:checked) ~ #T56:not(:checked) ~ #T66:not(:checked) ~ #T75:checked ~ #T86:not(:checked) ~ main label[for=T76],
+#T16:not(:checked) ~ #T26:not(:checked) ~ #T36:not(:checked) ~ #T46:not(:checked) ~ #T56:not(:checked) ~ #T66:not(:checked) ~ #T79:checked ~ #T86:not(:checked) ~ main label[for=T76] { display: block }
+#T17:not(:checked) ~ #T27:not(:checked) ~ #T37:not(:checked) ~ #T47:not(:checked) ~ #T57:not(:checked) ~ #T67:not(:checked) ~ #T74:checked ~ #T87:not(:checked) ~ main label[for=T77],
+#T17:not(:checked) ~ #T27:not(:checked) ~ #T37:not(:checked) ~ #T47:not(:checked) ~ #T57:not(:checked) ~ #T67:not(:checked) ~ #T78:checked ~ #T87:not(:checked) ~ main label[for=T77] { display: block }
+#T18:not(:checked) ~ #T28:not(:checked) ~ #T38:not(:checked) ~ #T48:not(:checked) ~ #T58:not(:checked) ~ #T68:not(:checked) ~ #T75:checked ~ #T88:not(:checked) ~ main label[for=T78],
+#T18:not(:checked) ~ #T28:not(:checked) ~ #T38:not(:checked) ~ #T48:not(:checked) ~ #T58:not(:checked) ~ #T68:not(:checked) ~ #T77:checked ~ #T88:not(:checked) ~ main label[for=T78],
+#T18:not(:checked) ~ #T28:not(:checked) ~ #T38:not(:checked) ~ #T48:not(:checked) ~ #T58:not(:checked) ~ #T68:not(:checked) ~ #T79:checked ~ #T88:not(:checked) ~ main label[for=T78] { display: block }
+#T19:not(:checked) ~ #T29:not(:checked) ~ #T39:not(:checked) ~ #T49:not(:checked) ~ #T59:not(:checked) ~ #T69:not(:checked) ~ #T76:checked ~ #T89:not(:checked) ~ main label[for=T79],
+#T19:not(:checked) ~ #T29:not(:checked) ~ #T39:not(:checked) ~ #T49:not(:checked) ~ #T59:not(:checked) ~ #T69:not(:checked) ~ #T78:checked ~ #T89:not(:checked) ~ main label[for=T79] { display: block }
+
+#T11:not(:checked) ~ #T21:not(:checked) ~ #T31:not(:checked) ~ #T41:not(:checked) ~ #T51:not(:checked) ~ #T61:not(:checked) ~ #T71:not(:checked) ~ #T82:checked ~ main label[for=T81],
+#T11:not(:checked) ~ #T21:not(:checked) ~ #T31:not(:checked) ~ #T41:not(:checked) ~ #T51:not(:checked) ~ #T61:not(:checked) ~ #T71:not(:checked) ~ #T84:checked ~ main label[for=T81] { display: block }
+#T12:not(:checked) ~ #T22:not(:checked) ~ #T32:not(:checked) ~ #T42:not(:checked) ~ #T52:not(:checked) ~ #T62:not(:checked) ~ #T72:not(:checked) ~ #T81:checked ~ main label[for=T82],
+#T12:not(:checked) ~ #T22:not(:checked) ~ #T32:not(:checked) ~ #T42:not(:checked) ~ #T52:not(:checked) ~ #T62:not(:checked) ~ #T72:not(:checked) ~ #T83:checked ~ main label[for=T82],
+#T12:not(:checked) ~ #T22:not(:checked) ~ #T32:not(:checked) ~ #T42:not(:checked) ~ #T52:not(:checked) ~ #T62:not(:checked) ~ #T72:not(:checked) ~ #T85:checked ~ main label[for=T82] { display: block }
+#T13:not(:checked) ~ #T23:not(:checked) ~ #T33:not(:checked) ~ #T43:not(:checked) ~ #T53:not(:checked) ~ #T63:not(:checked) ~ #T73:not(:checked) ~ #T82:checked ~ main label[for=T83],
+#T13:not(:checked) ~ #T23:not(:checked) ~ #T33:not(:checked) ~ #T43:not(:checked) ~ #T53:not(:checked) ~ #T63:not(:checked) ~ #T73:not(:checked) ~ #T86:checked ~ main label[for=T83] { display: block }
+#T14:not(:checked) ~ #T24:not(:checked) ~ #T34:not(:checked) ~ #T44:not(:checked) ~ #T54:not(:checked) ~ #T64:not(:checked) ~ #T74:not(:checked) ~ #T81:checked ~ main label[for=T84],
+#T14:not(:checked) ~ #T24:not(:checked) ~ #T34:not(:checked) ~ #T44:not(:checked) ~ #T54:not(:checked) ~ #T64:not(:checked) ~ #T74:not(:checked) ~ #T85:checked ~ main label[for=T84],
+#T14:not(:checked) ~ #T24:not(:checked) ~ #T34:not(:checked) ~ #T44:not(:checked) ~ #T54:not(:checked) ~ #T64:not(:checked) ~ #T74:not(:checked) ~ #T87:checked ~ main label[for=T84] { display: block }
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T82:checked ~ main label[for=T85],
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T84:checked ~ main label[for=T85],
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T86:checked ~ main label[for=T85],
+#T15:not(:checked) ~ #T25:not(:checked) ~ #T35:not(:checked) ~ #T45:not(:checked) ~ #T55:not(:checked) ~ #T65:not(:checked) ~ #T75:not(:checked) ~ #T88:checked ~ main label[for=T85] { display: block }
+#T16:not(:checked) ~ #T26:not(:checked) ~ #T36:not(:checked) ~ #T46:not(:checked) ~ #T56:not(:checked) ~ #T66:not(:checked) ~ #T76:not(:checked) ~ #T83:checked ~ main label[for=T86],
+#T16:not(:checked) ~ #T26:not(:checked) ~ #T36:not(:checked) ~ #T46:not(:checked) ~ #T56:not(:checked) ~ #T66:not(:checked) ~ #T76:not(:checked) ~ #T85:checked ~ main label[for=T86],
+#T16:not(:checked) ~ #T26:not(:checked) ~ #T36:not(:checked) ~ #T46:not(:checked) ~ #T56:not(:checked) ~ #T66:not(:checked) ~ #T76:not(:checked) ~ #T89:checked ~ main label[for=T86] { display: block }
+#T17:not(:checked) ~ #T27:not(:checked) ~ #T37:not(:checked) ~ #T47:not(:checked) ~ #T57:not(:checked) ~ #T67:not(:checked) ~ #T77:not(:checked) ~ #T84:checked ~ main label[for=T87],
+#T17:not(:checked) ~ #T27:not(:checked) ~ #T37:not(:checked) ~ #T47:not(:checked) ~ #T57:not(:checked) ~ #T67:not(:checked) ~ #T77:not(:checked) ~ #T88:checked ~ main label[for=T87] { display: block }
+#T18:not(:checked) ~ #T28:not(:checked) ~ #T38:not(:checked) ~ #T48:not(:checked) ~ #T58:not(:checked) ~ #T68:not(:checked) ~ #T78:not(:checked) ~ #T85:checked ~ main label[for=T88],
+#T18:not(:checked) ~ #T28:not(:checked) ~ #T38:not(:checked) ~ #T48:not(:checked) ~ #T58:not(:checked) ~ #T68:not(:checked) ~ #T78:not(:checked) ~ #T87:checked ~ main label[for=T88],
+#T18:not(:checked) ~ #T28:not(:checked) ~ #T38:not(:checked) ~ #T48:not(:checked) ~ #T58:not(:checked) ~ #T68:not(:checked) ~ #T78:not(:checked) ~ #T89:checked ~ main label[for=T88] { display: block }
+#T19:not(:checked) ~ #T29:not(:checked) ~ #T39:not(:checked) ~ #T49:not(:checked) ~ #T59:not(:checked) ~ #T69:not(:checked) ~ #T79:not(:checked) ~ #T86:checked ~ main label[for=T89],
+#T19:not(:checked) ~ #T29:not(:checked) ~ #T39:not(:checked) ~ #T49:not(:checked) ~ #T59:not(:checked) ~ #T69:not(:checked) ~ #T79:not(:checked) ~ #T88:checked ~ main label[for=T89] { display: block }
+
+
+/* ------------------------------------------------------------------------- */
+/* PLAYGROUND SETUP */
+/* ------------------------------------------------------------------------- */
+
+html, body {
+  font: 1rem sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+input {
+  display: none;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+
+  background: #333;
+}
+
+#game {
+  width: calc(3 * var(--tile));
+  height: calc(3 * var(--tile));
+  position: relative;
+
+  border: 2px solid white;
+}
+
+.hint {
+  display: block;
+  width: calc(3 * var(--tile));
+  height: calc(3 * var(--tile));
+
+  opacity: 0.3;
+}
+
+.newGame {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 800ms linear;
+
+  color: white;
+}
+
+.newGame a {
+  display: inline-block;
+  margin: 1rem 0;
+  padding: 0.5rem 0.5rem 0.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid #666;
+
+  color: black;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  background: white;
+}
+
+.newGame a:hover,
+.newGame a:active {
+  color: blue;
+}
+
+.tile {
+  width: var(--tile);
+  height: var(--tile);
+  box-sizing: border-box;
+  border: 1px solid black;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  background: url('img/zenika.png'), #333;
+  background-size: calc(3 * var(--tile)) calc(3 * var(--tile));
+
+  transform: translate(0,0);
+  transition: all 200ms ease;
+}
+
+.tile label {
+  display: none;
+  width: 100%;
+  height: 100%;
+
+  cursor: pointer;
+}
+
+.tile-1 { background-position: 0 0; }
+.tile-2 { background-position: calc(-1 * var(--tile)) 0; }
+.tile-3 { background-position: calc(-2 * var(--tile)) 0; }
+.tile-4 { background-position: 0                      calc(-1 * var(--tile)); }
+.tile-5 { background-position: calc(-1 * var(--tile)) calc(-1 * var(--tile)); }
+.tile-6 { background-position: calc(-2 * var(--tile)) calc(-1 * var(--tile)); }
+.tile-7 { background-position: 0                      calc(-2 * var(--tile)); }
+.tile-8 { background-position: calc(-1 * var(--tile)) calc(-2 * var(--tile)); }

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Taquin — No JS Game — Demo</title>
+
+<link rel="stylesheet" href="taquin.css">
+
+<!-- THIS IS THE GAME STATE -->
+<!-- Each radio group represent the state of a given tile -->
+
+<!-- State for tile-1 -->
+<input type="radio" name="T1" id="T11" checked>
+<input type="radio" name="T1" id="T12">
+<input type="radio" name="T1" id="T13">
+<input type="radio" name="T1" id="T14">
+<input type="radio" name="T1" id="T15">
+<input type="radio" name="T1" id="T16">
+<input type="radio" name="T1" id="T17">
+<input type="radio" name="T1" id="T18">
+<input type="radio" name="T1" id="T19">
+
+<!-- State for tile-2 -->
+<input type="radio" name="T2" id="T21">
+<input type="radio" name="T2" id="T22" checked>
+<input type="radio" name="T2" id="T23">
+<input type="radio" name="T2" id="T24">
+<input type="radio" name="T2" id="T25">
+<input type="radio" name="T2" id="T26">
+<input type="radio" name="T2" id="T27">
+<input type="radio" name="T2" id="T28">
+<input type="radio" name="T2" id="T29">
+
+<!-- State for tile-3 -->
+<input type="radio" name="T3" id="T31">
+<input type="radio" name="T3" id="T32">
+<input type="radio" name="T3" id="T33" checked>
+<input type="radio" name="T3" id="T34">
+<input type="radio" name="T3" id="T35">
+<input type="radio" name="T3" id="T36">
+<input type="radio" name="T3" id="T37">
+<input type="radio" name="T3" id="T38">
+<input type="radio" name="T3" id="T39">
+
+<!-- State for tile-4 -->
+<input type="radio" name="T4" id="T41">
+<input type="radio" name="T4" id="T42">
+<input type="radio" name="T4" id="T43">
+<input type="radio" name="T4" id="T44" checked>
+<input type="radio" name="T4" id="T45">
+<input type="radio" name="T4" id="T46">
+<input type="radio" name="T4" id="T47">
+<input type="radio" name="T4" id="T48">
+<input type="radio" name="T4" id="T49">
+
+<!-- State for tile-5 -->
+<input type="radio" name="T5" id="T51">
+<input type="radio" name="T5" id="T52">
+<input type="radio" name="T5" id="T53">
+<input type="radio" name="T5" id="T54">
+<input type="radio" name="T5" id="T55" checked>
+<input type="radio" name="T5" id="T56">
+<input type="radio" name="T5" id="T57">
+<input type="radio" name="T5" id="T58">
+<input type="radio" name="T5" id="T59">
+
+<!-- State for tile-6 -->
+<input type="radio" name="T6" id="T61" >
+<input type="radio" name="T6" id="T62">
+<input type="radio" name="T6" id="T63">
+<input type="radio" name="T6" id="T64">
+<input type="radio" name="T6" id="T65">
+<input type="radio" name="T6" id="T66" checked>
+<input type="radio" name="T6" id="T67">
+<input type="radio" name="T6" id="T68">
+<input type="radio" name="T6" id="T69">
+
+<!-- State for tile-7 -->
+<input type="radio" name="T7" id="T71">
+<input type="radio" name="T7" id="T72">
+<input type="radio" name="T7" id="T73">
+<input type="radio" name="T7" id="T74">
+<input type="radio" name="T7" id="T75">
+<input type="radio" name="T7" id="T76">
+<input type="radio" name="T7" id="T77" checked>
+<input type="radio" name="T7" id="T78">
+<input type="radio" name="T7" id="T79">
+
+<!-- State for tile-8 -->
+<input type="radio" name="T8" id="T81">
+<input type="radio" name="T8" id="T82">
+<input type="radio" name="T8" id="T83">
+<input type="radio" name="T8" id="T84">
+<input type="radio" name="T8" id="T85">
+<input type="radio" name="T8" id="T86">
+<input type="radio" name="T8" id="T87">
+<input type="radio" name="T8" id="T88">
+<input type="radio" name="T8" id="T89" checked>
+
+
+<!-- THIS IS THE GAME BOARD -->
+
+<main>
+  <div class="newGame">
+    <p>Congratulation, you solved the puzzle</p>
+  </div>
+
+  <section id="game">
+    <div class="tile tile-1">
+      <!--
+        Each label allows to activate a given state for the tile.
+        Which label is displayed depend on the overall state
+      -->
+      <label for="T11"></label>
+      <label for="T12"></label>
+      <label for="T13"></label>
+      <label for="T14"></label>
+      <label for="T15"></label>
+      <label for="T16"></label>
+      <label for="T17"></label>
+      <label for="T18"></label>
+      <label for="T19"></label>
+    </div>
+    <div class="tile tile-2">
+      <label for="T21"></label>
+      <label for="T22"></label>
+      <label for="T23"></label>
+      <label for="T24"></label>
+      <label for="T25"></label>
+      <label for="T26"></label>
+      <label for="T27"></label>
+      <label for="T28"></label>
+      <label for="T29"></label>
+    </div>
+    <div class="tile tile-3">
+      <label for="T31"></label>
+      <label for="T32"></label>
+      <label for="T33"></label>
+      <label for="T34"></label>
+      <label for="T35"></label>
+      <label for="T36"></label>
+      <label for="T37"></label>
+      <label for="T38"></label>
+      <label for="T39"></label>
+    </div>
+    <div class="tile tile-4">
+      <label for="T41"></label>
+      <label for="T42"></label>
+      <label for="T43"></label>
+      <label for="T44"></label>
+      <label for="T45"></label>
+      <label for="T46"></label>
+      <label for="T47"></label>
+      <label for="T48"></label>
+      <label for="T49"></label>
+    </div>
+    <div class="tile tile-5">
+      <label for="T51"></label>
+      <label for="T52"></label>
+      <label for="T53"></label>
+      <label for="T54"></label>
+      <label for="T55"></label>
+      <label for="T56"></label>
+      <label for="T57"></label>
+      <label for="T58"></label>
+      <label for="T59"></label>
+    </div>
+    <div class="tile tile-6">
+      <label for="T61"></label>
+      <label for="T62"></label>
+      <label for="T63"></label>
+      <label for="T64"></label>
+      <label for="T65"></label>
+      <label for="T66"></label>
+      <label for="T67"></label>
+      <label for="T68"></label>
+      <label for="T69"></label>
+    </div>
+    <div class="tile tile-7">
+      <label for="T71"></label>
+      <label for="T72"></label>
+      <label for="T73"></label>
+      <label for="T74"></label>
+      <label for="T75"></label>
+      <label for="T76"></label>
+      <label for="T77"></label>
+      <label for="T78"></label>
+      <label for="T79"></label>
+    </div>
+    <div class="tile tile-8">
+      <label for="T81"></label>
+      <label for="T82"></label>
+      <label for="T83"></label>
+      <label for="T84"></label>
+      <label for="T85"></label>
+      <label for="T86"></label>
+      <label for="T87"></label>
+      <label for="T88"></label>
+      <label for="T89"></label>
+    </div>
+
+    <img class="hint" src="img/zenika.png" alt="">
+  </section>
+
+  <div class="newGame">
+    <a href="./taquin.html">Start over</a>
+  </div>
+</main>
