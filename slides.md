@@ -64,9 +64,16 @@ Dans sa dimension la plus fondamental, <br>un jeu vidéo est un **état** <br>av
 
 ## Conclusion
 
-- Peut-on faire des jeux sans JS ? **[OUI !](https://accodeing.com/blog/2015/css3-proven-to-be-turing-complete)** <!-- .element: class="fragment" -->
-- Est-ce que c'est une bonne idée ? **NON !** <!-- .element: class="fragment" -->
+<ul>
+  <li class="fragment">Peut-on faire des jeux sans JS ? <a href="https://accodeing.com/blog/2015/css3-proven-to-be-turing-complete" class="fragment"> <strong>OUI !</strong></a></li>
+  <li class="fragment">Est-ce que c'est une bonne idée ? <strong class="fragment">NON !</strong></li>
+</ul>
 
 
 # Merci
 ## 🤯😘❤️🌈🦄
+
+
+## Votre avis nous intéresse
+
+![](demos/img/qrcode.png)
